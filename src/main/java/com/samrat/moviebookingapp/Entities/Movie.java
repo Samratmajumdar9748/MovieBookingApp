@@ -2,6 +2,7 @@ package com.samrat.moviebookingapp.Entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Table(name = "movies")
@@ -23,6 +24,20 @@ public class Movie {
     @Column(nullable = false,length = 500)
     private String trailerUrl;
 
+    @ManyToMany
+    private Set<Theatre> theatreSet;
+    public Movie(){
+
+    }
+
+    public Movie(String movieName, String movieDesc, LocalDate releaseDate, int duration, String coverPhotoUrl, String trailerUrl) {
+        this.movieName = movieName;
+        this.movieDesc = movieDesc;
+        this.releaseDate = releaseDate;
+        this.duration = duration;
+        this.coverPhotoUrl = coverPhotoUrl;
+        this.trailerUrl = trailerUrl;
+    }
 
     @Override
     public String toString() {

@@ -14,7 +14,7 @@ public class City {
     private String cityName;
 
     @Column
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "" )
+    @OneToMany(mappedBy = "city",fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     private Set<Theatre> theatreSet;
 
     @Override
@@ -39,5 +39,12 @@ public class City {
 
     public void setCityName(String cityName) {
         this.cityName = cityName;
+    }
+
+    public Set<Theatre> getTheatreSet(){
+        return this.theatreSet;
+    }
+    public void setTheatreSet(Set<Theatre> theatreSet){
+        this.theatreSet=theatreSet;
     }
 }

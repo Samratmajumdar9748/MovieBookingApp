@@ -2,6 +2,7 @@ package com.samrat.moviebookingapp.Entities;
 
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "theatre")
@@ -14,17 +15,19 @@ public class Theatre {
 
     @ManyToOne
     @JoinColumn(name = "city_id",nullable = false)
-    private City cityId;
+    private City city;
 
     @Column(name = "ticket_price",nullable = false)
     private float ticketPrice=150.00f;
 
+    @ManyToMany(mappedBy = "theatreSet")
+    private Set<Movie> movieSet;
     @Override
     public String toString() {
         return "Theatre{" +
                 "theatreId=" + theatreId +
                 ", theatreName='" + theatreName + '\'' +
-                ", cityId=" + cityId +
+                ", cityId=" + city +
                 ", ticketPrice=" + ticketPrice +
                 '}';
     }
@@ -45,19 +48,21 @@ public class Theatre {
         this.theatreName = theatreName;
     }
 
-    public City getCityId() {
-        return cityId;
-    }
-
-    public void setCityId(City cityId) {
-        this.cityId = cityId;
-    }
-
     public float getTicketPrice() {
         return ticketPrice;
     }
 
-    public void setTicketPrice(int ticketPrice) {
+    public void setTicketPrice(float ticketPrice) {
         this.ticketPrice = ticketPrice;
     }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+
 }
